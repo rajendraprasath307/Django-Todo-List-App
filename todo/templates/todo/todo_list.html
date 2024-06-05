@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+        /* Inline CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <a href="{% url 'todo_create' %}">Add New To-Do</a>
+    <ul>
+        {% for todo in todos %}
+            <li>
+                <a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a>
+                ({{ todo.completed|yesno:"Completed,Not Completed" }})
+                <a href="{% url 'todo_update' todo.pk %}">Edit</a>
+                <a href="{% url 'todo_delete' todo.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
